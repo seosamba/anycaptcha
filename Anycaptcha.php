@@ -58,7 +58,6 @@ class Anycaptcha implements RCMS_Core_PluginInterface {
 		}
 		$this->_dispatch($requestedParams);
 		$captchaId                     = RCMS_Tools_Tools::generateCaptcha();
-		//Zend_Debug::dump($captchaId);
 		$this->_session->captchaId     = $captchaId;
 		$this->_view->captchaId        = $captchaId;
 		$this->_view->captchaSettings  = $this->_dbTalbeSettings->fetchAllConfig();
@@ -117,7 +116,6 @@ class Anycaptcha implements RCMS_Core_PluginInterface {
 			$httpClient = new Zend_Http_Client($realAction);
 			$httpClient->setRawData(http_build_query($params));
 			$response = $httpClient->request(Zend_Http_Client::POST);
-			//Zend_Debug::dump($response);
 			if($response->getStatus() != 200) {
 				$this->_session->captchaError[] = 'Faild to send form';
 				if(isset($captchaSettings['redirectFail'])) {
@@ -133,12 +131,6 @@ class Anycaptcha implements RCMS_Core_PluginInterface {
 				$this->_session->captchaError[] = 'Form sent.';
 				$this->_redirector->gotoUrlAndExit(($this->_session->pluginPageUrl) ? $this->_session->pluginPageUrl : $this->_websiteUrl);
 			}
-			//header('HTTP/1.1 307 Temporary Redirect');
-			//header('Location: ' . $realAction);
-			//$this->_view->realAction = $realAction;
-			//$this->_view->params     = $params;
-			//echo $this->_view->render('hidform.phtml');
-			//exit;
 		}
 		$this->_session->captchaError[] = $captchaSettings['errorText'];
 		$this->_session->savedParams    = $params;
@@ -152,9 +144,7 @@ class Anycaptcha implements RCMS_Core_PluginInterface {
 		}
 		elseif ($this->_request->isXmlHttpRequest()) {
 			$data = $this->_request->getParams();
-			//Zend_Debug::dump($data); die();
 			$result = $this->_dbTalbeSettings->updateSettings($data);
-			Zend_Debug::dump($result);
 			exit;
 		}
 		echo $this->_view->render('settings.phtml');
