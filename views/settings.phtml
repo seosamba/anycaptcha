@@ -1,0 +1,18 @@
+<?php echo $this->headLink()->appendStylesheet($this->websiteUrl . 'plugins/anycaptcha/system/css/captcha.css'); ?>
+<div id="captcha_plugin_settings_overlay" style="display: none;" class="overlay">
+	SAVING...
+</div>
+<div class="captcha_plugin_border_wrapper">
+	<div id="captcha_plugin_settings">
+		<div id="captcha_plugin_settings_header">
+			Captcha settings
+		</div>
+		<div id="captcha_plugin_settings_body">
+			<?php echo $this->settingsForm; ?>
+		</div>
+	</div>
+</div>
+<a id="captcha_plugin_settings_close" href="javascript:;" onclick="parent.tb_remove();">close</a>
+<?php $this->headScript()->prependFile((false !== @file_get_contents(RCMS_Object_QuickConfig_QuickConfig::G_JQ_HOSTED_URL)) ? RCMS_Object_QuickConfig_QuickConfig::G_JQ_HOSTED_URL : $this->websiteUrl . 'system/js/jquery/jquery.js'); ?>
+<?php $this->headScript()->appendFile($this->websiteUrl . 'plugins/anycaptcha/system/js/settings.js'); ?>
+<?php echo $this->headScript(); ?>

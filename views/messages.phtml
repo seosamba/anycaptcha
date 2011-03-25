@@ -1,0 +1,9 @@
+<?php if(isset($this->messages) && is_array($this->messages) && !empty($this->messages)): ?>
+	<div class="captcha_plugin_message" style="background: #ee0000; padding: 10px; opacity: 0.7;" onclick="$(this).fadeOut();">
+		<?php foreach($this->messages as $message): ?>
+			<p class="captcha_plugin_message_item" style="color: #fff; font-size: 15px;"><?php echo $message; ?></p>
+		<?php endforeach; ?>
+	</div>
+<?php endif; ?>
+<?php $this->headScript()->appendFile($this->websiteUrl . 'plugins/anycaptcha/system/js/error.js'); ?>
+<?php echo $this->headScript(); ?>

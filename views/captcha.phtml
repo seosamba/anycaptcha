@@ -1,0 +1,23 @@
+<div class="captcha_plugin">
+	<img class="captcha_plugin_image" src="<?php echo $this->captchaSettings['imagePath'] . $this->captchaId . $this->captchaSettings['imageExt'] ?>" width="<?php echo $this->captchaSettings['imageWidth'];?>" height="<?php echo $this->captchaSettings['imageHeight']; ?>" alt="captcha plugin" style="width: <?php echo $this->captchaSettings['imageWidth']; ?>px; height: <?php echo $this->captchaSettings['imageHeight']; ?>px;"/>
+	<div class="captcha_plugin_code">
+		<?php if(isset($this->captchaSettings['inputText'])): ?>
+			<span class="captcha_plugin_inpute_label"><?php echo $this->captchaSettings['inputText']; ?></span>
+		<?php endif; ?>
+		<input type="text" name="captcha" value="" class="captcha_plugin_code_input" />
+	</div>
+</div>
+<?php if(isset($this->savedParams) && !empty($this->savedParams)): ?>
+	<script type="text/javascript">
+		<?php foreach ($this->savedParams as $name => $value): ?>
+			$.each($(document).find('input'), function(){
+				if($(this).attr('name') == '<?php echo $name; ?>') {
+					$(this).attr('value', '<?php echo $value; ?>');
+				}
+				if($(this).attr('name') == 'captcha') {
+					$(this).attr('value', '');
+				}
+			});
+		<?php endforeach; ?>
+	</script>
+<?php endif; ?>

@@ -1,0 +1,11 @@
+<form name="hidform" action="<?php echo $this->realAction; ?>" method="post" id="hidform">
+	<?php foreach ($this->params as $name => $value): ?>
+		<?php if($name != 'submit'): ?>
+			<input type="text" style="width: 1px; height: 1px; border: none; background: #fff; color: #fff;" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />
+		<?php endif; ?>
+	<?php endforeach; ?>
+</form>
+<script type="text/javascript">
+	var frm = document.getElementById('hidform');
+	frm.submit();
+</script>
